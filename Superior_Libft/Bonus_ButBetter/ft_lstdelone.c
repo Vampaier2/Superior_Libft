@@ -35,7 +35,8 @@ Checks:
 !del -> function del is Null
 -------------------------------------------------------------
 
-*head = node->next;
+if (*head == node)
+		*head = node->next;
 ->updates the head, to point to the next node. Making the second node the new head.
 
  */
