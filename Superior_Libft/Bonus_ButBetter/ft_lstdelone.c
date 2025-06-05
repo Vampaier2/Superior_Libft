@@ -6,32 +6,32 @@
 /*   By: xalves <xalves@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 15:49:37 by xalves            #+#    #+#             */
-/*   Updated: 2025/06/04 17:45:41 by xalves           ###   ########.fr       */
+/*   Updated: 2025/06/05 11:15:49 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_lstdelone(t_list **head, t_list *node, void (*del)(void *))
 {
-	if (!lst || !del)
+	if (!*head || !head || !node || !del)
 		return ;
-	del(lst->content);
-	free(lst);
+	// Update the head
+	if (*head == node)
+		*head = node->next;
+	if (node->prev)
+		(node->prev)->next = node->next;
+	if (node->next)
+		(node->next)->prev = node->prev;
+	del(node->content);
+	free(node);
 }
 /*
-IT ISN'T THE JOB OF 'ft_lstdelone' do relink the list.
+if (!*head || !head || !node || !del)
+Checks:
+!*head -> checks if the list is Null
+!head -> checks if the pointer to the list head itself is NULL.
+!node -> node to delete is Null
+!del -> function del is Null
 
-You do it before calling 'ft_lstdelone', like this :
-
----------------------------------------
-	if (node->prev)
-		node->prev->next = node->next;
-	if (node->next)
-		node->next->prev = node->prev;
-
-THEN!!!!
-
-	ft_lstdelone(node, free);
-----------------------------------------
  */
