@@ -33,5 +33,9 @@ Checks:
 !head -> checks if the pointer to the list head itself is NULL.
 !node -> node to delete is Null
 !del -> function del is Null
+-------------------------------------------------------------
+
+*head = node->next;
+->updates the head, to point to the next node. Making the second node the new head.
 
  */
